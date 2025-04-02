@@ -3,7 +3,7 @@ const authController = require('../controllers/auth_controller');
 const validatorMiddleware = require('../middlewares/validation_middleware');
 
 router.get('/login', authController.loginFormunuGoster);
-router.post('/login', authController.login);
+router.post('/login', validatorMiddleware.validateLogin(), authController.login);
 
 
 router.get('/register', authController.registerFormunuGoster);

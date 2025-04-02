@@ -3,12 +3,20 @@ const express = require('express');
 const app = express();
 const session = require('express-session');
 const flash = require('connect-flash');
+const passport = require('passport');
 
 // routerler include edilir
 const authRouter = require('./src/routers/auth_router');
+const adminRouter = require('./src/routers/admin_router');
 
 // DB bağlantısı
 require('./src/config/database');
+const MongoDBStore = require('connect-mongodb-session')(session);
+
+const sessionStore = new MongoDBStore ({
+    uri: process.env.MONGODB_CONNECTION_STRING ,
+    collection : 'sessionlar'
+})
 
 // session ve flash message
 app.use(session(
@@ -17,24 +25,30 @@ app.use(session(
         resave : false,
         saveUninitialized: true,
         cookie: {
-            maxAge:1000
-        }
+            maxAge:1000 * 60 * 60 * 24
+        },
+        store:sessionStore
     }
 ));
 
+// flash mesajların middleware olarak kullanılmasını sağladık
 app.use(flash());
 app.use((req,res,next) => {
     res.locals.validation_error = req.flash('validation_error');
+    res.locals.success_message = req.flash('success_message');
     res.locals.email = req.flash('email');
     res.locals.ad = req.flash('ad');
     res.locals.soyad = req.flash('soyad');
     res.locals.sifre = req.flash('sifre');
     res.locals.resifre = req.flash('resifre');
-
+    res.locals.login_error = req.flash('error');
 
 
     next();
 });
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // formdan gelen değerlerin okuna bilmesi için 
 app.use(express.urlencoded({extended: true}));
@@ -49,10 +63,11 @@ app.set('view engine' , 'ejs');
 app.set('views', path.resolve(__dirname, './src/views'));
 
 app.get('/' , (req, res) => {
-    res.json({ mesaj: 'merhaba'});
+    res.json({ mesaj: 'merhaba' , kullanici:req.user});
 })
 
 app.use('/', authRouter);
+app.use('/admin', adminRouter);
 
 app.listen(process.env.PORT, () => {
     console.log(`Server ${process.env.PORT} portundan ayaklandı`)
