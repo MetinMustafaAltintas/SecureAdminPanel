@@ -82,11 +82,24 @@ const forgetPassword = (req , res , next) => {
     res.render('forget_password' , { layout: './layout/auth_layout.ejs'});
 }
 
+const logout = (req,res,next) => {
+    req.logout((err) => {
+        if (err) {
+            return next(err);
+        }
+        req.session.destroy((error) => {
+            res.clearCookie('connect.sid');
+            res.render('login', {layout:'./layout/auth_layout.ejs', success_message: [{msg:'Başarıyla Çıkış Yapıldı'}]});
+        })
+    });
+}
+
 module.exports = {
     loginFormunuGoster,
     registerFormunuGoster,
     forgetPasswordFormunuGoster,
     register,
     login,
-    forgetPassword
+    forgetPassword,
+    logout
 }

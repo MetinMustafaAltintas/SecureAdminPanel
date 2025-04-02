@@ -4,11 +4,21 @@ const oturumAcilmis = function (req , res , next) {
     }
     else {
         req.flash('error' , ['Lütfen önce oturum açın']);
-        req.redirect('/login');
+        res.redirect('/login');
+    }
+}
+
+const oturumAcilmamis = function (req,res,next) {
+    if(!req.isAuthenticated()){
+        return next();
+    }
+    else {
+        res.redirect('/admin');
     }
 }
 
 module.exports = {
-    oturumAcilmis
+    oturumAcilmis,
+    oturumAcilmamis
 }
 

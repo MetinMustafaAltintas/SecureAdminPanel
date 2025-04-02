@@ -9,6 +9,15 @@ const passport = require('passport');
 const authRouter = require('./src/routers/auth_router');
 const adminRouter = require('./src/routers/admin_router');
 
+//template engine ayarları
+const ejs = require('ejs');
+const expressLayouts = require('express-ejs-layouts');
+const path = require('path');
+app.use(expressLayouts);
+app.use(express.static('public'));
+app.set('view engine' , 'ejs');
+app.set('views', path.resolve(__dirname, './src/views'));
+
 // DB bağlantısı
 require('./src/config/database');
 const MongoDBStore = require('connect-mongodb-session')(session);
@@ -53,14 +62,7 @@ app.use(passport.session());
 // formdan gelen değerlerin okuna bilmesi için 
 app.use(express.urlencoded({extended: true}));
 
-//template engine ayarları
-const ejs = require('ejs');
-const expressLayouts = require('express-ejs-layouts');
-const path = require('path');
-app.use(expressLayouts);
-app.use(express.static('public'));
-app.set('view engine' , 'ejs');
-app.set('views', path.resolve(__dirname, './src/views'));
+
 
 app.get('/' , (req, res) => {
     res.json({ mesaj: 'merhaba' , kullanici:req.user});
