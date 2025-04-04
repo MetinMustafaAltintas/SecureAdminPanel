@@ -6,6 +6,8 @@ const authMiddleware = require('../middlewares/auth_middleware');
 router.get('/login',authMiddleware.oturumAcilmamis, authController.loginFormunuGoster);
 router.post('/login',authMiddleware.oturumAcilmamis, validatorMiddleware.validateLogin(), authController.login);
 
+router.get('/verify', authController.veriftMail);
+
 router.get('/logout',authMiddleware.oturumAcilmis, authController.logout);
 
 

@@ -23,6 +23,10 @@ const UserSchema = new Schema({
         unique: true,
         lowercase: true,
     },
+    emailAktif: {
+        type: Boolean,
+        default:false
+    },
     sifre: {
         type : String,
         required : true,
