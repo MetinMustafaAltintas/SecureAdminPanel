@@ -1,7 +1,11 @@
 [build]
-  base = "."  # Kök dizin
+  base = "."
   command = "npm run build"
-  publish = "build"  # Build çıktısının bulunduğu dizin
+  publish = "build"
+
+[context.production.environment]
+  SITE_ID = "1be9ce5e-9787-4b2c-8570-6610579ae3d3"
 
 [functions]
   directory = "netlify/functions"
+  
