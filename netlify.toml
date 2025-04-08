@@ -1,0 +1,7 @@
+[build]
+  base = "."  # Kök dizin
+  command = "npm run build"
+  publish = "build"  # Build çıktısının bulunduğu dizin
+
+[functions]
+  directory = "netlify/functions"
