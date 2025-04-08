@@ -4,10 +4,10 @@
   "description": "A secure admin panel with user authentication and access management",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon app.js",
-    "start": "netlify dev",
-    "build": "netlify build"
-  },
+  "dev": "nodemon app.js",
+  "start": "netlify dev",
+  "build": "echo 'Building project' && mkdir build && cp -r src/* build/"
+},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MetinMustafaAltintas/SecureAdminPanel.git"

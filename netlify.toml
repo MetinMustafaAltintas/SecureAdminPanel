@@ -1,11 +1,10 @@
 [build]
-  base = "."
-  command = "npm run build"
-  publish = "build"
+  base = "."  # Kök dizin
+  command = "npm run build"  # Build komutu
+  publish = "/Users/metinaltintas/Documents/GitHub/SecureAdminPanel/build"
 
 [context.production.environment]
-  SITE_ID = "1be9ce5e-9787-4b2c-8570-6610579ae3d3"
+  SITE_ID = "1be9ce5e-9787-4b2c-8570-6610579ae3d3"  # Site ID, doğru görünüyor
 
 [functions]
-  directory = "netlify/functions"
-  
+  directory = "netlify/functions"  # Fonksiyonlar dizini
