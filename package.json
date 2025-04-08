@@ -4,9 +4,9 @@
   "description": "A secure admin panel with user authentication and access management",
   "main": "index.js",
   "scripts": {
-  "dev": "nodemon app.js",
-  "start": "netlify dev",
-  "build": "netlify build"
+    "dev": "nodemon app.js",
+    "start": "netlify dev",
+    "build": "netlify build"
   },
   "repository": {
     "type": "git",
@@ -35,5 +35,8 @@
     "nodemailer": "^6.10.0",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "netlify-cli": "^19.1.6"
   }
 }
