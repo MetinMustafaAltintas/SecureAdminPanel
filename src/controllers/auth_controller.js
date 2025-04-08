@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken');
 
 
 const loginFormunuGoster = (req , res , next) => {
-    res.render('login' , { layout: './layout/auth_layout.ejs'});
+    res.render('login' , { layout: './layout/auth_layout.ejs', title:'Giriş Yap'});
 }
 const login = (req , res , next) => {
 
@@ -29,7 +29,7 @@ const login = (req , res , next) => {
 }
 
 const registerFormunuGoster = (req , res , next) => {
-    res.render('register' , { layout: './layout/auth_layout.ejs'});
+    res.render('register' , { layout: './layout/auth_layout.ejs', title:'Kayıt Ol'});
 }
 const register = async (req , res , next) => {
 
@@ -123,7 +123,7 @@ const register = async (req , res , next) => {
 
 
 const forgetPasswordFormunuGoster = (req , res , next) => {
-    res.render('forget_password' , { layout: './layout/auth_layout.ejs'});
+    res.render('forget_password' , { layout: './layout/auth_layout.ejs' , title:'Şifremi Unuttum'});
 }
 
 const forgetPassword = async (req , res , next) => {
@@ -195,7 +195,7 @@ const logout = (req,res,next) => {
         }
         req.session.destroy((error) => {
             res.clearCookie('connect.sid');
-            res.render('login', {layout:'./layout/auth_layout.ejs', success_message: [{msg:'Başarıyla Çıkış Yapıldı'}]});
+            res.render('login', {layout:'./layout/auth_layout.ejs', title:'Giriş Yap', success_message: [{msg:'Başarıyla Çıkış Yapıldı'}]});
         })
     });
 }
@@ -292,7 +292,7 @@ const yeniSifreFormuGoster =async (req,res,next) => {
                     req.flash('error', 'Kod Hatalı veya Süresi Geçmiş');
                     res.redirect('/forget-password');
                 } else {
-                    res.render('new_password', {id:linktediID,token:linktediToken,layout: './layout/auth_layout.ejs'});
+                    res.render('new_password', {id:linktediID,token:linktediToken,layout: './layout/auth_layout.ejs', title:'Şifre Güncelle'});
 
                 //     const tokenIcindekiID = decoded.id;
                 //     const sonuc = await User.findByIdAndUpdate(tokenIcindekiID, { emailAktif :true });

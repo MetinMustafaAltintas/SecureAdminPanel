@@ -29,16 +29,30 @@ module.exports = function (passport) {
     }));
 
     passport.serializeUser(function(user, done){
-        console.log("sessiona Kaydedildi" + user.id);
         done(null, user.id);
     });
 
     passport.deserializeUser(async (id, done) => {
         try {
             const user = await User.findById(id);
-            done(null, user);
+            
+            if (!user) {
+                return done(new Error('User not found'));
+            }
+    
+            const yeniUser = {
+                id: user.id,
+                email: user.email,
+                ad: user.ad,
+                soyad: user.soyad,
+                sifre: user.sifre,
+                olusturulmaTarihi: user.createdAt,
+                avatar:user.avatar
+            }; ;
+    
+            done(null, yeniUser);
         } catch (err) {
-            done(err, user);
+            done(err);
         }
     });
 

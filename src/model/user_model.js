@@ -23,6 +23,10 @@ const UserSchema = new Schema({
         unique: true,
         lowercase: true,
     },
+    avatar:{
+        type:String,
+        default:'../../uploads/avatars/default.jpeg'
+    },
     emailAktif: {
         type: Boolean,
         default:false
