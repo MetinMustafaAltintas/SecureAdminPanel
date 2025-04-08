@@ -1,5 +1,6 @@
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('../model/user_model');
+const bcrypt = require('bcrypt');
 
 module.exports = function (passport) {
     const options = {
@@ -13,11 +14,15 @@ module.exports = function (passport) {
                     if (!_bulunanUser) {
                             return done(null , false, { message: 'User Bulunamadı'});
                     } 
-                    if (_bulunanUser.sifre !== sifre) {
-                            return done(null, false, { message : 'Şifre Hatalı'});
+                    const sifreKontrol = await bcrypt.compare(sifre,_bulunanUser.sifre);
+                    if(!sifreKontrol){
+                        return done(null, false, { message : 'Şifre Hatalı'});
                     } else {
-                            return  done(null , _bulunanUser);
-                    }
+                        if (_bulunanUser && _bulunanUser.emailAktif == false) {
+                            return done(null , false, { message: 'Lütfen emailiniz onaylayın'});
+                        } 
+                        return  done(null , _bulunanUser);
+                    }        
             } catch (error) {
                     return done(error);
             }

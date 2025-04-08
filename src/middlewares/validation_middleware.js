@@ -40,7 +40,32 @@ const validateLogin = () => {
     ];
 }
 
+const validateEmail = () => {
+    return [
+        body('email')
+            .trim()
+            .isEmail().withMessage('Geçerli bir mail giriniz'),
+    ];
+}
+
+const validateNewPassword = () => {
+    return [
+        body('sifre').trim()
+            .isLength({min:6}).withMessage('Şifre en az 6 karakter olmalı')
+            .isLength({max:14}).withMessage('Şifre en fazla 14 karakter olmalı'),
+
+        body('resifre').trim().custom((value, {req}) => {
+            if (value !== req.body.sifre){
+                throw new Error('Şifreler aynı değil');
+            }
+            return true;
+        })
+    ];
+} 
+
 module.exports = {
     validateNewUser,
-    validateLogin
+    validateLogin,
+    validateEmail,
+    validateNewPassword
 }
