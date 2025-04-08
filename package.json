@@ -6,7 +6,7 @@
   "scripts": {
   "dev": "nodemon app.js",
   "start": "netlify dev",
-  "build": "echo 'Building project' && mkdir build && cp -r src/* build/"
+  "build": "echo 'Building project' && mkdir -p build && cp -r src/* build/"
 },
   "repository": {
     "type": "git",
