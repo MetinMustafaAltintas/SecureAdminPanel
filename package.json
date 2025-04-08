@@ -4,9 +4,9 @@
   "description": "A secure admin panel with user authentication and access management",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon app.js",
-    "start": "node app.js",
-    "build": "node app.js"
+  "dev": "nodemon app.js",
+  "start": "netlify dev",
+  "build": "netlify build"
   },
   "repository": {
     "type": "git",
