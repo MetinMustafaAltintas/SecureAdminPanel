@@ -2,6 +2,8 @@
   base = "."
   command = "npm run build"
   publish = "build"  # Build çıktılarınızın bulunduğu dizin
+  functions = "netlify/functions"
+
   
 [context.production.environment]
   SITE_ID = "1be9ce5e-9787-4b2c-8570-6610579ae3d3"  # Site ID, doğru görünüyor
@@ -11,3 +13,8 @@
   external_node_modules = ["express", "ejs"]
   node_bundler = "esbuild"
   included_files = ["views/", "public/"]
+
+  [[redirects]]
+  from = "/*"
+  to = "/.netlify/functions/server/:splat"
+  status = 200
