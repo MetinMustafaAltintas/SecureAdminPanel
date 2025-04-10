@@ -4,10 +4,10 @@
   "description": "A secure admin panel with user authentication and access management",
   "main": "index.js",
   "scripts": {
-  "dev": "nodemon app.js",
-  "start": "netlify dev",
-  "build": "echo 'Building project' && mkdir -p build && cp -r src/* build/"
-},
+    "dev": "nodemon app.js",
+    "start": "netlify dev",
+    "build": "echo 'Building project' && mkdir -p build && cp -r src/* build/"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MetinMustafaAltintas/SecureAdminPanel.git"
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/MetinMustafaAltintas/SecureAdminPanel#readme",
   "dependencies": {
+    "@netlify/functions": "^3.0.4",
     "bcrypt": "^5.1.1",
     "connect-flash": "^0.1.1",
     "connect-mongodb-session": "^5.0.0",
@@ -34,7 +35,8 @@
     "multer": "^1.4.5-lts.2",
     "nodemailer": "^6.10.0",
     "passport": "^0.7.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "serverless-http": "^3.2.0"
   },
   "devDependencies": {
     "netlify-cli": "^19.1.6"
