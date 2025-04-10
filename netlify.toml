@@ -8,3 +8,6 @@
 
 [functions]
   directory = "netlify/functions"  # Fonksiyonlar dizini
+  external_node_modules = ["express", "ejs"]
+  node_bundler = "esbuild"
+  included_files = ["views/", "public/"]
