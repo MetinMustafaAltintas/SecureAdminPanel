@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A secure admin panel with user authentication and access management",
   "main": "index.js",
+  "homepage": "/",
   "scripts": {
     "dev": "nodemon app.js",
     "start": "netlify dev",
@@ -18,7 +19,6 @@
   "bugs": {
     "url": "https://github.com/MetinMustafaAltintas/SecureAdminPanel/issues"
   },
-  "homepage": "https://github.com/MetinMustafaAltintas/SecureAdminPanel#readme",
   "dependencies": {
     "@netlify/functions": "^3.0.4",
     "bcrypt": "^5.1.1",
