@@ -4,8 +4,6 @@ const app = express();
 const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
-const serverless = require('serverless-http');
-
 
 // routerler include edilir
 const authRouter = require('./src/routers/auth_router');
@@ -16,20 +14,14 @@ const ejs = require('ejs');
 const expressLayouts = require('express-ejs-layouts');
 const path = require('path');
 app.use(expressLayouts);
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static('public'));
 app.use("/uploads",express.static(path.join(__dirname,'src/uploads')));
 app.set('view engine' , 'ejs');
-app.set("views", path.join(__dirname, "views"));
+app.set('views', path.resolve(__dirname, './src/views'));
 
 // DB bağlantısı
 require('./src/config/database');
 const MongoDBStore = require('connect-mongodb-session')(session);
-
-// Define route to render your main page
-app.get("/", (req, res) => {
-    res.render("/login");
-    
-  });
 
 const sessionStore = new MongoDBStore ({
     uri: process.env.MONGODB_CONNECTION_STRING ,
@@ -79,7 +71,6 @@ app.get('/' , (req, res) => {
 
 app.use('/', authRouter);
 app.use('/admin', adminRouter);
-module.exports.handler = serverless(app);
 
 app.listen(process.env.PORT, () => {
     console.log(`Server ${process.env.PORT} portundan ayaklandı`)
