@@ -64,7 +64,6 @@ app.use(passport.session());
 app.use(express.urlencoded({extended: true}));
 
 
-
 app.get('/' , (req, res) => {
     res.json({ mesaj: 'merhaba' , kullanici:req.user});
 })
